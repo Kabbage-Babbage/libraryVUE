@@ -30,7 +30,7 @@ npm i --save numcaptcha-vue
 
 In your `main.js`, call the `Vue.use()` global method to use the plugin.
 
-> :warning: :warning: :warning: numCaptchaVUE uses [Font Awesome](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) icons hence please install the neccessary packages. Also, do remember to pass `FontAwesomeIcon` and `fas` as options into the plugin.
+> :warning: numCaptchaVUE uses [Font Awesome](https://www.npmjs.com/package/@fortawesome/vue-fontawesome) icons hence please install the neccessary packages. Also, do remember to pass `FontAwesomeIcon` and `fas` as options into the plugin.
 
 ```js
 // firstly, import and use Font Awesome
