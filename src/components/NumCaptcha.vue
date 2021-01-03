@@ -93,11 +93,16 @@ export default {
     },
     async reloadCaptcha() {
       this.blurCaptcha = true;
-
-      const { image, id } = await getCaptcha();
-      this.id = id;
-      this.imageSrc = image;
       this.updateStatus('pending');
+
+      try {
+        const { image, id } = await getCaptcha();
+        this.id = id;
+        this.imageSrc = image;
+      } catch (err) {
+        // show alt message when error getting Captcha
+        this.blurCaptcha = false;
+      }
 
       this.blurCaptcha = false;
       this.clearInput();

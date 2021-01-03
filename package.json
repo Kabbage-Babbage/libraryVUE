@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build": "vue-cli-service build --target lib --name numcaptcha-vue src/main.js"
+    "build": "vue-cli-service build --target lib --name numcaptcha-vue src/main.js",
+    "serve-component": "vue serve src/components/NumCaptcha.vue"
   },
   "dependencies": {
     "core-js": "^3.6.5",
