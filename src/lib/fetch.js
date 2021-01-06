@@ -17,13 +17,16 @@ export async function getCaptcha() {
 }
 
 export async function submitCaptcha(id, check) {
-  const response = await fetch(`${apiEndpoint}/images`, {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({ id, check })
+  const url = new URL(`${apiEndpoint}/images`);
+  const params = {
+    id,
+    check
+  };
+
+  Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+  const response = await fetch(url.toString(), {
+    method: 'POST'
   });
 
   if (!response.ok) {
