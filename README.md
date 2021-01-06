@@ -53,10 +53,10 @@ Vue.use(NumCaptcha, { FontAwesomeIcon, fas });
 
 After importing the plugin, you can use it _anywhere_ in your vue application using the `<num-captcha />` component.
 
-> The component returns a event called `success` when the user successfully completes numCAPTCHA. For eg: You can use it to enable the submit button of the form when the `success` event is emitted.
+> The component emits an event called `status` with the value of `success` when the user successfully completed _numCaptcha_ or with the value of `failed` when the user is identified as a bot
 
 ```html
-<num-captcha @success="do_something_when_authentication_is_success" />
+<num-captcha @status="success | failed" />
 ```
 
 ---
