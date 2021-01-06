@@ -1,7 +1,3 @@
-@someone else please prettify this.. make it look professional (actual file is not uploaded to npm YET)
-
----
-
 <div align="center">
   <img src="./static/logo.png">
 </div>
