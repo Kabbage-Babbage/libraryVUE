@@ -59,15 +59,13 @@ export default {
       forcedReloadTime: 15000,
       showReloadTime: 5000,
       displayTimeoutInstance: null,
-      intervalInstance: null
+      intervalInstance: null,
+      errorCount: 0,
+      errorThreshold: 3
     };
   },
   async mounted() {
     await this.reloadCaptcha();
-
-    this.intervalInstance = setInterval(async () => {
-      await this.reloadCaptcha();
-    }, this.forcedReloadTime);
   },
   methods: {
     clearInput() {
@@ -92,6 +90,8 @@ export default {
       }
     },
     async reloadCaptcha() {
+      this.restartIntervalInstance();
+
       this.blurCaptcha = true;
       this.updateStatus('pending');
 
@@ -125,20 +125,42 @@ export default {
         }
 
         submitCaptcha(this.id, check).then(
-          response => {
-            if (this.intervalInstance) {
-              clearInterval(this.intervalInstance);
-            }
-            this.updateStatus('success');
-            this.hideReload = true;
-            this.$emit('success', response);
+          () => {
+            this.endCaptcha('success');
+            this.$emit('status', 'success');
           },
           () => {
+            this.errorCount++;
+
+            if (this.errorCount >= this.errorThreshold) {
+              this.endCaptcha('failed');
+              this.$emit('status', 'failed');
+              return;
+            }
+
             this.updateStatus('failed');
             this.hideReload = false;
           }
         );
       }
+    },
+    restartIntervalInstance() {
+      // we need to stop current interval to prevent race condition
+      if (this.intervalInstance) {
+        clearInterval(this.intervalInstance);
+      }
+
+      this.intervalInstance = setInterval(async () => {
+        await this.reloadCaptcha();
+      }, this.forcedReloadTime);
+    },
+    endCaptcha(status) {
+      if (this.intervalInstance) {
+        clearInterval(this.intervalInstance);
+      }
+
+      this.updateStatus(status);
+      this.hideReload = true;
     }
   }
 };
@@ -166,7 +188,8 @@ export default {
 }
 
 .captcha-image > img {
-  filter: blur(3px);
+  height: 53px;
+  width: 135px;
 }
 
 .captcha-content {
