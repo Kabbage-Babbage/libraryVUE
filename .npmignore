@@ -1,0 +1,17 @@
+/src
+/static
+/public
+.browserslistrc
+.*ignore
+.eslintrc.js
+.prettierrc
+vue.config.js
+.github
+.vscode
+babel.config.js
+package-lock.json
+src
+__tests__
+tests
+reports
+dist/demo.html

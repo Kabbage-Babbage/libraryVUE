@@ -1,6 +1,7 @@
 {
   "name": "numcaptcha-vue",
-  "version": "0.1.2",
+  "version": "0.1.4",
+  "description": "numCaptchaVUE is a VueJS Plugin that allows you to use numCAPTCHA easily on your website.",
   "scripts": {
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
@@ -28,5 +29,13 @@
     "prettier": "^1.19.1",
     "vue-template-compiler": "^2.6.12"
   },
-  "main": "./dist/numcaptcha-vue.common.js"
+  "main": "./dist/numcaptcha-vue.common.js",
+  "keywords": [
+    "vue",
+    "plugin",
+    "vue-plugin",
+    "captcha",
+    "numcaptcha"
+  ],
+  "license": "MIT"
 }
